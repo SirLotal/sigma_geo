@@ -25,17 +25,15 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:             "sigma_geo",
-		Width:             1024,
-		Height:            768,
-		MinWidth:          1024,
-		MinHeight:         768,
+		Title:             "SigmaGeo",
+		WindowStartState:  options.Fullscreen,
+		MinWidth:          800,
+		MinHeight:         800,
 		DisableResize:     false,
-		Fullscreen:        false,
 		Frameless:         false,
 		StartHidden:       false,
 		HideWindowOnClose: false,
-		BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
+		BackgroundColour:  &options.RGBA{R: 0, G: 12, B: 24, A: 127},
 		Assets:            assets,
 		Menu:              nil,
 		Logger:            nil,
@@ -44,7 +42,6 @@ func main() {
 		OnDomReady:        app.DomReady,
 		OnBeforeClose:     app.BeforeClose,
 		OnShutdown:        app.Shutdown,
-		WindowStartState:  options.Normal,
 		Bind: []interface{}{
 			app,
 		},
@@ -53,8 +50,7 @@ func main() {
 			WebviewIsTransparent: false,
 			WindowIsTranslucent:  false,
 			DisableWindowIcon:    false,
-			// DisableFramelessWindowDecorations: false,
-			WebviewUserDataPath: "",
+			WebviewUserDataPath:  "",
 		},
 		// Mac platform specific options
 		Mac: &mac.Options{
@@ -70,7 +66,7 @@ func main() {
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
 			About: &mac.AboutInfo{
-				Title:   "sigma_geo",
+				Title:   "SigmaGeo",
 				Message: "",
 				Icon:    icon,
 			},
