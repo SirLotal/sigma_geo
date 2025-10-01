@@ -1,0 +1,10 @@
+{
+  "name": "sigma_geo",
+  "outputfilename": "sigma_geo",
+  "frontend:install": "",
+  "frontend:build": "",
+  "author": {
+    "name": "",
+    "email": ""
+  }
+}
