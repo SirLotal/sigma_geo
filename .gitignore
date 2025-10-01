@@ -22,3 +22,8 @@ go.sum
 
 # System enviroment variables
 env
+
+frontend/node_modules
+.sass-cache
+.npm
+.env

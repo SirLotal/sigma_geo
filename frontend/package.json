@@ -1,0 +1,17 @@
+{
+  "name": "sigma_geo_frontend",
+  "version": "0.0.1",
+  "description": "frontend for \"sigma_geo\" project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.93.2"
+  },
+  "dependencies": {
+    "katex": "^0.16.22"
+  }
+}
