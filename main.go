@@ -22,6 +22,7 @@ var icon []byte
 func main() {
 	// Create an instance of the app structure
 	app := controllers.NewApp()
+	project_manager := controllers.NewProjectManager()
 
 	// Create application with options
 	err := wails.Run(&options.App{
@@ -44,6 +45,7 @@ func main() {
 		OnShutdown:        app.Shutdown,
 		Bind: []interface{}{
 			app,
+			project_manager,
 		},
 		// Windows platform specific options
 		Windows: &windows.Options{
