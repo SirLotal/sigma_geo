@@ -1,4 +1,8 @@
 package controllers
 
-var internal_folder = "internal/"
-var projects_folder = internal_folder + "projects/"
+import (
+	"path/filepath"
+)
+
+var internal_folder = "internal"
+var projects_folder = filepath.Join(internal_folder + "projects")

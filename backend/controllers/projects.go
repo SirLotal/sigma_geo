@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"sigma_geo/backend/controllers/file_manager"
 	"sigma_geo/backend/models"
@@ -22,7 +23,7 @@ func NewProjectManager() *ProjectManager {
 }
 
 func (p *ProjectManager) OpenProject(name string) (err error) {
-	db, err := gorm.Open(sqlite.Open(projects_folder+name+"/"+name+".db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open(filepath.Join(projects_folder, name, name+".db")), &gorm.Config{})
 	if err != nil {
 		return fmt.Errorf("database (%s) connection failed: %w", name, err)
 	}
@@ -36,11 +37,11 @@ func (p *ProjectManager) OpenProject(name string) (err error) {
 }
 
 func (p *ProjectManager) CreateProject(name string) (err error) {
-	err = file_manager.MakeDir(projects_folder + name)
+	err = file_manager.MakeDir(filepath.Join(projects_folder, name))
 	if err != nil {
 		return
 	}
-	err = file_manager.MakeFile(projects_folder + name + "/" + name + ".db")
+	err = file_manager.MakeFile(filepath.Join(projects_folder, name, name+".db"))
 	return
 }
 
@@ -55,31 +56,31 @@ func (p *ProjectManager) DeleteProject(name string) (err error) {
 			return fmt.Errorf("closing (%s) db failed: %w", name, err)
 		}
 	}
-	err = file_manager.Remove(projects_folder + name)
+	err = file_manager.Remove(filepath.Join(projects_folder, name))
 	return
 }
 
 func (p *ProjectManager) CreateSubproject(proj_name, sub_name string) (err error) {
-	err = file_manager.MakeDir(projects_folder + proj_name + "/" + sub_name)
+	err = file_manager.MakeDir(filepath.Join(projects_folder, proj_name, sub_name))
 	return
 }
 
 func (p *ProjectManager) DeleteSubproject(proj_name, sub_name string) (err error) {
-	err = file_manager.Remove(projects_folder + proj_name + "/" + sub_name)
+	err = file_manager.Remove(filepath.Join(projects_folder, proj_name, sub_name))
 	return
 }
 
 func (p *ProjectManager) CreateVariant(proj_name, sub_name, var_name string) (err error) {
-	variant_path := proj_name + "/" + sub_name + "/" + var_name
-	err = file_manager.MakeDir(projects_folder + variant_path)
+	variant_path := filepath.Join(proj_name, sub_name, var_name)
+	err = file_manager.MakeDir(filepath.Join(projects_folder, variant_path))
 	if err != nil {
 		return
 	}
-	err = file_manager.MakeFile(projects_folder + variant_path + "/" + var_name + ".tex")
+	err = file_manager.MakeFile(filepath.Join(projects_folder, variant_path, var_name+".tex"))
 	if err != nil {
 		return
 	}
-	err = file_manager.MakeFile(projects_folder + variant_path + "/" + var_name + "_sol.tex")
+	err = file_manager.MakeFile(filepath.Join(projects_folder, variant_path, var_name+"_sol.tex"))
 	return
 }
 
@@ -88,8 +89,7 @@ func (p *ProjectManager) CompileVariant(subproj_name, var_name string) (err erro
 }
 
 func (p *ProjectManager) DeleteVariant(proj_name, sub_name, var_name string) (err error) {
-	variant_path := proj_name + "/" + sub_name + "/" + var_name
-	err = file_manager.Remove(projects_folder + variant_path)
+	err = file_manager.Remove(filepath.Join(projects_folder, proj_name, sub_name, var_name))
 	return
 }
 
