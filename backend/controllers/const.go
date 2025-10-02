@@ -5,4 +5,4 @@ import (
 )
 
 var internal_folder = "internal"
-var projects_folder = filepath.Join(internal_folder + "projects")
+var projects_folder = filepath.Join(internal_folder, "projects")
