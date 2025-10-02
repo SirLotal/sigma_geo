@@ -89,7 +89,7 @@ func (p *ProjectManager) CompileVariant(subproj_name, var_name string) (err erro
 
 func (p *ProjectManager) DeleteVariant(proj_name, sub_name, var_name string) (err error) {
 	variant_path := proj_name + "/" + sub_name + "/" + var_name
-	err = file_manager.Remove("internal/projects/" + variant_path)
+	err = file_manager.Remove(projects_folder + variant_path)
 	return
 }
 
